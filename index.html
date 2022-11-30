@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		body{
+			background-image: url(https://wallpaperaccess.com/full/804263.jpg);
+			height: 100vh;
+			background-size: cover;
+		}
+		.two{
+			margin: 20% 40%;
+			padding: 3%;
+			border-radius: 25px;
+			background-color: white;
+		}
+		#name{
+			border: 1px solid black;
+			margin-bottom: 4%;
+			padding: 1% 7%;
+			border-radius: 25px;
+			border-color: none;
+		}
+		#pass{
+			border: 1px solid black;
+			margin-bottom: 3%;
+			padding: 1% 7%;
+			border-radius: 25px;
+			border-color: none;
+		}
+		.btn{
+			background-color: rgb(133, 138, 126);
+			padding: 1% 10%;
+			border-radius: 25px;
+			border: none;
+			margin: 5% 30%;
+
+		}
+		#cars{
+			margin: 4% 23%;
+			padding: 1% 17%;
+			border-radius: 25px;
+		}
+	</style>
+</head>
+<body>
+	<div class="two">
+		<input id="name" placeholder="Enter your name"/></br>
+		<input id="pass" placeholder="Password"/></br>
+		<select id="cars">
+			<option value="mpc">Mpc</option>
+			<option value="bipc">BIpc</option>
+			<option value="bzc">Bzc</option>
+			<option value="bsc">Bsc</option>
+			<option value="bba">BBA</option>
+		  </select>
+		  <input type="radio" name="gender" id="male">Male<br>
+		  <input type="radio" name="gender" id="female">Female<br>
+		<button class="btn" onclick="sub()">Submit</button>
+
+	</div>
+	
+	<script type="text/javascript">
+		function sub(){
+			let newName=document.getElementById("name").value
+			let newPassword=document.getElementById("pass").value
+			let newDrop=document.getElementById("cars").value
+			let gmale=document.getElementById("male").checked
+			let gfemale=document.getElementById("female").checked
+			if(gmale==true) 
+				var gender="Male"
+			else 
+				var gender="Female"
+			console.log(newName)
+			console.log(newPassword)
+			console.log(newDrop)
+			console.log(gender)
+			fetch("http://localhost:5000/newData",{
+			method:"POST",
+			headers:{
+				"Content-Type":"application/json"
+			},
+			body:JSON.stringify({name:newName,password:newPassword,course:newDrop,gender:gender})
+		})
+			.then((res)=>{
+				console.log(res)
+				if(res.status===200)
+					alert("Registration successful")
+			})
+			.catch((err)=>{
+				alert(err)
+			})
+		}
+	</script>
+</body>
+</html>
